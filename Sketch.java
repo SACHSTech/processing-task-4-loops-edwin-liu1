@@ -11,7 +11,7 @@ public class Sketch extends PApplet {
 
   public void settings() {
 	// put your size call here
-    size(400, 400);
+    size(600, 600);
 
   /** 
    * Called once at the beginning of execution.  Add initial set up
@@ -38,6 +38,7 @@ public class Sketch extends PApplet {
    */
   public void draw() {
     stroke(0);
+    strokeWeight(1);
 
     // top left quadrent
 
@@ -66,16 +67,49 @@ public class Sketch extends PApplet {
     }
 
     // bottom left quadrent
-
-    //current issue
-    int gradiant = 0;
-    for (int i = 0; i <= (width / 2); i += (width / 2 / 255))
+    for (int i = 0; i <= (width / 2); i += 1)
     {
-        strokeWeight(255 / (width / 2) );
-        stroke(gradiant, gradiant, gradiant);
-        line(i, height / 2, i, height);
-        gradiant = gradiant + (width / 2 / 255);
+      int Gradiant = (int)(i * 1.3);
+      stroke(Gradiant, Gradiant, Gradiant);
+      line(i, height / 2, i, height);
     }
+
+    //bottom right quadrent
+
+    pushMatrix();
+    // new origon point
+    translate(width - (width / 4), height - (height / 4) );
+
+    // large petal inital rotation
+    rotate(QUARTER_PI/2);
+
+    // first large petal set up
+    stroke(0);
+    fill(100, 184, 205);
+
+    for (int i = 0; i <= 8; i++)
+    {
+      rotate(TWO_PI / 8);
+      ellipse(0, ScreenSize / 10 , ScreenSize / 12, ScreenSize / 5);
+    }
+
+    // second large petal set up
+    stroke(255);
+    strokeWeight(ScreenSize / 200);
+    fill(124, 214, 231);
+    for (int i = 0; i <= 8; i++)
+    {
+      rotate(TWO_PI / 8);
+      ellipse(0, ScreenSize / 10 , ScreenSize / 18, ScreenSize / 7);
+    }
+    popMatrix();
+
+    // flower center thing
+    strokeWeight(ScreenSize / 150);
+    stroke(196, 174, 36);
+    fill(243, 216, 96);
+    circle(width - (width / 4), height - (height / 4), ScreenSize / 10);
+
   }
   
   // define other methods down here.
