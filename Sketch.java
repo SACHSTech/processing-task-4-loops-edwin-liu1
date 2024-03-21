@@ -8,6 +8,8 @@ public class Sketch extends PApplet {
    */
 
    int ScreenSize;
+   int GradLineSpace;
+   double GradMultiplier;
 
   public void settings() {
 	// put your size call here
@@ -25,6 +27,16 @@ public class Sketch extends PApplet {
     else
     {
       ScreenSize = width;
+    }
+
+    if (width / 2 < 255)
+    {
+      GradLineSpace = (width / 2);
+    }
+    else
+    {
+      GradLineSpace = (width / 2) / 255;
+      GradMultiplier = 0.9;
     }
 
   }
@@ -56,23 +68,26 @@ public class Sketch extends PApplet {
     // top right quadrent
 
     // going horizsontaly
-    for (int i = (width / 2) + (ScreenSize / 10); i <= width - (ScreenSize / 10); i += (ScreenSize / 10) )
+    for (int i = (width / 2) + (ScreenSize / 12); i <= width - (ScreenSize / 12); i += (ScreenSize / 12) )
     {
       // going verticaly
-      for (int n = (ScreenSize / 10); n <= (height / 2) - (ScreenSize / 10); n += (ScreenSize / 10) )
+      for (int n = (ScreenSize / 12); n <= (height / 2) - (ScreenSize / 12); n += (ScreenSize / 12) )
       {
         fill(200,255,255);
-        circle(i, n, (ScreenSize / 12) );
+        circle(i, n, (ScreenSize / 15) );
       }
     }
 
     // bottom left quadrent
-    for (int i = 0; i <= (width / 2); i += 1)
+    for (int i = 0; i < (width / 2); i += ( (width / 2) / 255) )
     {
-      int Gradiant = (int)(i * 1.3);
+      int Gradiant;
+      Gradiant = (int)(i * 0.9);
       stroke(Gradiant, Gradiant, Gradiant);
+      strokeWeight(1);
       line(i, height / 2, i, height);
     }
+    // couldn't get this to be scaleable with the window
 
     //bottom right quadrent
 
@@ -80,11 +95,23 @@ public class Sketch extends PApplet {
     // new origon point
     translate(width - (width / 4), height - (height / 4) );
 
-    // large petal inital rotation
+    // secondary petal set up
+    stroke(0);
+    strokeWeight(1);
+    fill(234, 214, 255);
+
+    for (int i = 0; i <= 8; i++)
+    {
+      rotate(TWO_PI / 8);
+      ellipse(0, ScreenSize / 8 , ScreenSize / 10, ScreenSize / 8);
+    }
+
+    // large petal rotational offset
     rotate(QUARTER_PI/2);
 
     // first large petal set up
     stroke(0);
+    strokeWeight(1);
     fill(100, 184, 205);
 
     for (int i = 0; i <= 8; i++)
