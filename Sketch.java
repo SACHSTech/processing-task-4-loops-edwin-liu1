@@ -13,7 +13,7 @@ public class Sketch extends PApplet {
 
   public void settings() {
 	// put your size call here
-    size(600, 600);
+    size(400, 400);
 
   /** 
    * Called once at the beginning of execution.  Add initial set up
@@ -31,12 +31,11 @@ public class Sketch extends PApplet {
 
     if (width / 2 < 255)
     {
-      GradLineSpace = (width / 2);
+      GradLineSpace = (width / 2) /122;
     }
     else
     {
       GradLineSpace = (width / 2) / 255;
-      GradMultiplier = 0.9;
     }
 
   }
@@ -79,12 +78,12 @@ public class Sketch extends PApplet {
     }
 
     // bottom left quadrent
-    for (int i = 0; i < (width / 2); i += ( (width / 2) / 255) )
+    for (int i = 0; i < (width / 2); i += GradLineSpace)
     {
       int Gradiant;
-      Gradiant = (int)(i * 0.9);
+      Gradiant = (int)(i * 1.3);
       stroke(Gradiant, Gradiant, Gradiant);
-      strokeWeight(1);
+      strokeWeight(GradLineSpace);
       line(i, height / 2, i, height);
     }
     // couldn't get this to be scaleable with the window
